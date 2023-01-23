@@ -26,7 +26,7 @@ def check():
                 imported = json.load(json_data, strict=False)
         except json.decoder.JSONDecodeError:
             pass
-        if (imported["action"]):
+        if(imported["action"]):
             print("Read")
             sleep(0.0002)
             pass

@@ -1,6 +1,6 @@
-import json, time
+from json import load, dump
 with open("./connect.json", encoding='utf-8', errors='ignore') as json_data:
-    imported = json.load(json_data, strict=False)
+    imported = load(json_data, strict=False)
 print("Press \"w\" to send trigger")
 
 while True:
@@ -8,9 +8,9 @@ while True:
     if (inp == "w"):
         imported["action"] = True
         connector = open("./connect.json", "w", encoding="utf-8")
-        json.dump(imported, connector)
+        dump(imported, connector)
         connector.close()
         imported["action"] = False
         connector = open("./connect.json", "w", encoding="utf-8")
-        json.dump(imported, connector)
+        dump(imported, connector)
         connector.close()
