@@ -19,10 +19,10 @@ def clock():
         if hours == 24:
             hours = 0
 
-def check():
+def check(path):
     while True:
         try:
-            with open("./connect.json", encoding='utf-8', errors='ignore') as json_data:
+            with open(path, encoding='utf-8', errors='ignore') as json_data:
                 imported = json.load(json_data, strict=False)
         except json.decoder.JSONDecodeError:
             pass
@@ -33,7 +33,7 @@ def check():
 
 if __name__ == '__main__':
     q = Process(target=clock)
-    s = Process(target=check)
+    s = Process(target=check, args=("./connect.json",))
     q.start()
     s.start()
     q.join()
