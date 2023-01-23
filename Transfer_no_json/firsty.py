@@ -1,4 +1,5 @@
-from multiprocessing import Process
+from threading import Thread, Event
+# import threading
 from time import sleep
 # from secondy import option
 # import ctypes
@@ -21,25 +22,42 @@ def clock():
             hours = 0
 
 def check():
-    # while True:
-    #     workplace = ctypes.cast(option, ctypes.py_object)
-    #     if(workplace.value):
-    #         print("Read")
-    #         sleep(1)
-
     while True:
-        try:
-            from secondy import callback
-            if(callback):
-                print("Read")
-                del callback
-        except ImportError:
-            pass
+        if(callback.wait()):
+            print("Read")
+            del callback
 
 if __name__ == '__main__':
-    q = Process(target=clock)
-    s = Process(target=check)
+    q = Thread(target=clock)
+    s = Thread(target=check)
     q.start()
     s.start()
     q.join()
     s.join()
+# example of using an event object
+# from time import sleep
+# from random import random
+# from threading import Thread
+# from threading import Event
+
+# # target task function
+# def task(event, number):
+#     # wait for the event to be set
+#     event.wait()
+#     # begin processing
+#     value = random()
+#     sleep(value)
+#     print(f'Thread {number} got {value}')
+
+# # create a shared event object
+# event = Event()
+# # create a suite of threads
+# for i in range(5):
+#     thread = Thread(target=task, args=(event, i))
+#     thread.start()
+# # block for a moment
+# print('Main thread blocking...')
+# sleep(2)
+# # start processing in all threads
+# event.set()
+# # wait for all the threads to finish...

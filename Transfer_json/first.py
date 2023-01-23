@@ -1,5 +1,5 @@
 from multiprocessing import Process
-import time
+from time import sleep
 import json
 
 def clock():
@@ -9,7 +9,7 @@ def clock():
     while True:
         print(f"{hours:02}:{minutes:02}:{seconds:02}")
         seconds += 1
-        time.sleep(1)
+        sleep(1)
         if seconds == 60:
             seconds = 0
             minutes += 1
@@ -27,8 +27,9 @@ def check():
         except json.decoder.JSONDecodeError:
             pass
         if (imported["action"]):
-            print("Readed")
-            time.sleep(1)
+            print("Read")
+            sleep(0.0002)
+            pass
 
 if __name__ == '__main__':
     q = Process(target=clock)
